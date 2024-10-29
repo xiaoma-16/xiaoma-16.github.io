@@ -1,345 +1,356 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>《web安全深度解析》</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="《web安全深度解析》">
-<meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="《web安全深度解析》">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="小马">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="《web安全深度解析》" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+     
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="/css/main.css">
 
-  
-  
+    
+    
+
+
+
+
+
+
+
+    
+    
+    
+        <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        
+            load: ['[tex]/mhchem'],
+        
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        
+            packages: {'[+]': ['mhchem']},
+        
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+          
+
+    
+    
+    
+    
+    <title>
+          
+            
+        
+    </title>
+    
+    
 <meta name="generator" content="Hexo 7.3.0"></head>
-
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">《web安全深度解析》</a>
-      </h1>
-      
+    <div id="app">
+        <v-app>
+            <v-content id="page">
+                <v-container fluid>
+                    <v-row>
+                        <v-col cols="2" class="d-none d-md-block">
+                            <div id="sidebar" class="float-right">
+    <a href="/" rel="home">
+        <v-avatar size=96>
+            <img id="logo" src="/images/avatar.webp">     
+        </v-avatar> 
+    </a>
+    <v-divider></v-divider>
+    <div class="mini-menu">
+        <v-btn icon href="/">
+            <v-icon>home</v-icon>
+        </v-btn>
+        <v-btn icon href="/categories/">
+            <v-icon>folder</v-icon>
+        </v-btn>
+        <v-btn icon href="/tags/">
+            <v-icon>bookmark</v-icon>
+        </v-btn>
+        <v-btn icon @click="SetNightMode">
+            <v-icon>{{ nightMode }}</v-icon>
+        </v-btn>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+    <v-list id="main-menu" class="font-weight-bold" flat>
         
-          <a class="main-nav-link" href="/">Home</a>
+            
+            <v-list-item href="/archives/" link>
+            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                归档
+            </v-list-item-content>
+            </v-list-item>
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+            
+            <v-list-item href="/about/" link>
+            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                关于
+            </v-list-item-content>
+            </v-list-item>
         
-      </nav>
-      <nav id="sub-nav">
+            
+            <v-list-item href="https://garybear.cn/" link>
+            <v-list-item-icon><v-icon>rss_feed</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                我的博客
+            </v-list-item-content>
+            </v-list-item>
         
+            
+            <v-list-item href="https://garybear.cn/hexo-theme-insulin/doc/#/" link>
+            <v-list-item-icon><v-icon>insert_drive_file</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                说明文档
+            </v-list-item-content>
+            </v-list-item>
         
-          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+    </v-list>
+    <v-divider></v-divider>
+    
+        <v-list id="sub-menu" class="font-weight-medium" dense>
+            
+        </v-list>    
+    
+
+    <div id="footer">
+        <div class="footer-social">
+            
+                
+                <v-btn icon href="mailto:kb1000fx@gmail.com" target="_blank">
+                    <v-icon>fas fa-envelope</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://github.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-github</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://steamcommunity.com/profiles/76561198346798163" target="_blank">
+                    <v-icon>fab fa-steam</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://weibo.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-weibo</v-icon>
+                </v-btn>
+            
+        </div>
+        <v-divider></v-divider>
+        <div class="footer-content">
+            
+                <span id="busuanzi_container_site_uv" style="display: none;"> 
+                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                </span>
+                <br>
+            
+            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
+            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+            <span>
+                &copy; 2015 - 2024 
+                小马
+            </span>
+        </div>
+    </div>
+</div>
+
+                        </v-col>
+                        <v-col cols="12" md="10">
+                            <v-row>
+  <v-col cols="12" md="8" align-self="end">
+    <div id="site-header">
+      <div id="site-title">
+        <a href="/" rel="home"></a>
       </div>
+      <div id="site-description"></div>
+      <div id="mobile-menu" class="d-block d-md-none">
+        <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+        <div class="mobile-mini-menu">
+          <v-btn icon href="/">
+              <v-icon>home</v-icon>
+          </v-btn>
+          <v-btn icon href="/categories/">
+              <v-icon>folder</v-icon>
+          </v-btn>
+          <v-btn icon href="/tags/">
+              <v-icon>bookmark</v-icon>
+          </v-btn>
+          <v-btn icon @click="SetNightMode">
+              <v-icon>{{ nightMode }}</v-icon>
+          </v-btn>
+          
+            
+            <v-btn icon href="/archives/">
+              <v-icon>archive</v-icon>
+            </v-btn>
+          
+            
+            <v-btn icon href="/about/">
+              <v-icon>account_circle</v-icon>
+            </v-btn>
+          
+            
+            <v-btn icon href="https://garybear.cn/">
+              <v-icon>rss_feed</v-icon>
+            </v-btn>
+          
+            
+            <v-btn icon href="https://garybear.cn/hexo-theme-insulin/doc/#/">
+              <v-icon>insert_drive_file</v-icon>
+            </v-btn>
+          
+        </div>
+      </div>    
     </div>
-  </div>
-</header>
+  </v-col>  
+  <v-col cols="4" align-self="end" class="d-none d-md-block">
+    <v-col align-self="end">
+      <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+    </v-col> 
+  </v-col>
+</v-row>
 
-      <div class="outer">
-        <section id="main">
+                            <v-card class="elevation-2 index-card">
   
-    <article id="post-10月22日" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/22/10%E6%9C%8822%E6%97%A5/" class="article-date">
-  <time class="dt-published" datetime="2024-10-22T11:34:24.000Z" itemprop="datePublished">2024-10-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <article class="index-article">
+      
+      <div class="index-article-header">
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <div class="index-article-header-date font-weight-medium">
+              2024-10-29
+            </div>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="auto">
+            
+          </v-col>
+        </v-row>
+        <span>
+          
+            <a class="index-article-header-category font-weight-bold" href="/2024/10/29/%E3%80%8Aweb%E5%AE%89%E5%85%A8%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0/">未分类></a>
+           
+        </span> 
+        <a class="index-article-header-title font-weight-medium" href="/2024/10/29/%E3%80%8Aweb%E5%AE%89%E5%85%A8%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0/">《web安全深度剖析》学习日记</a>
+      </div>
+      
+      <div class="index-article-content">
         
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/22/10%E6%9C%8822%E6%97%A5/">10月22日</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/22/10%E6%9C%8822%E6%97%A5/" data-id="cm2kfx8ps0003d4ix6leh6p80" data-title="10月22日" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-10月21日" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/22/10%E6%9C%8821%E6%97%A5/" class="article-date">
-  <time class="dt-published" datetime="2024-10-22T11:34:08.000Z" itemprop="datePublished">2024-10-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/22/10%E6%9C%8821%E6%97%A5/">10月21日</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/22/10%E6%9C%8821%E6%97%A5/" data-id="cm2kfx8pq0001d4ix4bs60df2" data-title="10月21日" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-10月20日" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/22/10%E6%9C%8820%E6%97%A5/" class="article-date">
-  <time class="dt-published" datetime="2024-10-22T11:33:53.000Z" itemprop="datePublished">2024-10-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/22/10%E6%9C%8820%E6%97%A5/">10月20日</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>浏览器是衣服（渲染工作）</p>
-<p>http是无状态协议（短暂连接）</p>
-<p>http只能由客户端发起</p>
-<p>请求request&#x2F;应答response</p>
-<p>http请求包括请求行（请求方法）、请求头（消息报头）、请求正文三部分<br>请求行：方法、请求内容、版本信息<br>请求头：请求的附加信息与客户端自身的信息<br>请求正文：参数（空白行后面，不包括空白行）（可要可不要）</p>
-<p>方法有get、head、post、put、delete、trace、connect、options等</p>
-<p>请求头内可能有host、user-agent、referer、cookie、range、accept、<br>accept-charset</p>
-<p>http响应包括响应行、响应头（消息报头）、响应正文（消息主题）<br>响应行：版本、状态码、消息<br>响应头：根据客户端请求变化<br>响应正文：html数据</p>
-<p>状态码有5类37个（最讨厌404了）</p>
-<p>响应头可能有server、set-cookie、last-modified（最后时间）、location（经常配合302状态码）、refresh（定时刷新）</p>
-<p>http消息又称http头，包括请求头、响应头、普通头（了解即可）、实体头</p>
-<p>普通头：data、connection、close、cache-control等</p>
-<p>实体头：content-type（介质类型）、content-encoding（媒体类型的修饰符）、content-length（长度）、last-modified（最后修改的时间）等</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/22/10%E6%9C%8820%E6%97%A5/" data-id="cm2kfx8pr0002d4ixc0x03eog" data-title="10月20日" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-10月19日" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/22/10%E6%9C%8819%E6%97%A5/" class="article-date">
-  <time class="dt-published" datetime="2024-10-22T11:33:38.000Z" itemprop="datePublished">2024-10-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/22/10%E6%9C%8819%E6%97%A5/">10月19日</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>渗透的一个必要条件是：二者能通信！！！</p>
-<p>当今时代的战场在web应用程序</p>
-<p>早期web多数为静态文件，目前是动态文件的天下</p>
-<p>web有庞大又强大的功能&#x3D;&#x3D;数据库+编程语言+web容器（我感觉是浏览器）+web应用程序设计者</p>
-<p>web默认80端口</p>
-<p>开发人员的安全意识！！！</p>
-<p>想做到高的安全，应该考虑“动态链接统一管理化”，就像是“一条龙服务”，如果在中间断了，后面的人不了解前面的原理，很难维修。目前的网络市场还没达到“一条龙”级别。</p>
-<p>web攻击分三大类，c段渗透，社会工程学，services（实际的攻击是杂交的，就是什么都可能用到）<br>c段渗透：利用同一网段下的易攻性，制作跳板等<br>社会工程学：即心里学，人的劣质性，如贪小便宜、妄想一飞冲天（赌钱）、色欲（本质上都是控制力弱的表现），还有可能是无知等等<br>services：溢出、mysql、ftp、mssql、rdp（远程桌面协议）、web（sql注入、上传漏洞、xss、包含漏洞、代码执行、逻辑漏洞）</p>
-<p>程序！！！</p>
-<p>黑客与骇客之间的战争</p>
-<p>c语言，神一样的语言！！！</p>
-<p>c&#x2F;s架构即client&#x2F;server，客户端&#x2F;服务端架构<br>b&#x2F;s架构即browser&#x2F;server，浏览器&#x2F;服务端架构</p>
-<p>统一的应用层协议——http</p>
-<p>url：<br>协议:&#x2F;&#x2F;服务器IP[：端口]&#x2F;路径&#x2F;[?查询]</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/22/10%E6%9C%8819%E6%97%A5/" data-id="cm2kfx8pk0000d4ixe495d0l5" data-title="10月19日" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2024/10/22/10%E6%9C%8822%E6%97%A5/">10月22日</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/22/10%E6%9C%8821%E6%97%A5/">10月21日</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/22/10%E6%9C%8820%E6%97%A5/">10月20日</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/22/10%E6%9C%8819%E6%97%A5/">10月19日</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
+          2024年10月19日
+渗透的一个必要条件是：二者能通信！！！
+当今时代的战场在web应用程序
+早期web多数为静态文件，目前是动态文件的天下
+web有庞大又强大的功能&#x3D;&#x3D;数据库+编程语言+web容器（我感觉是浏览器）+web应用程序设计者
+web默认80端口
+开发人员的安全意识！！！
+想做到高的安全，应该考虑“动态链接统一管理化”，就像是“一条龙服务”，如果在中间断了，后面的人不了解前面的原理，很难维修。目前的网络市场还没达到“一条龙”级别。
+web攻击分三大类，c段渗透，社会工程学，services（实际的攻击是杂交的，就是什么都可能用到）c段渗透：利用同一网段下...
         
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
       
-      &copy; 2024 小马<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
+      <div class="index-article-readmore ">
+        <v-btn text href="/2024/10/29/%E3%80%8Aweb%E5%AE%89%E5%85%A8%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0/">阅读更多</v-btn>
+      </div>
+      <v-divider></v-divider>
+    </article> 
+   
+</v-card>  
 
+         
+                            <div id="mobile-footer" class="d-block d-md-none">
+                                <v-divider></v-divider>
+                                <div id="mobile-footer-content">
+                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+                                    <span> &copy; 2015 - 2024 小马</span>
+                                </div>
+                            </div>                   
+                        </v-col>                                            
+                    </v-row>
+                </v-container>
+            </v-content>
+        </v-app>
     </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
     
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
 
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
+<script src="/js/main.js"></script>
 
 
 
 
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-  </div>
+
+
+
+
+
+
+
 </body>
 </html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <script>if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode)) window.location.href="https://support.dmeng.net/upgrade-your-browser.html?referrer="+encodeURIComponent(window.location.href); </script>
+    
+    
+        <link rel="shortcut icon" href="/images/favicon.ico">
+    
+     
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.2.30/dist/vuetify.min.css" rel="stylesheet">
+    
+<link rel="stylesheet" href="/css/main.css">
+
+    
+    
+
+
+
+
+
+
+
+    
+    
+          
+
+    
+    
+    
+    
+    <title>
+        
+            《web安全深度剖析》学习日记 | null
+        
+    </title>
+    
+    
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="app">
+        <v-app>
+            <v-content id="page">
+                <v-container fluid>
+                    <v-row>
+                        <v-col cols="2" class="d-none d-md-block">
+                            <div id="sidebar" class="float-right">
+    <a href="/" rel="home">
+        <v-avatar size=96>
+            <img id="logo" src="/images/avatar.webp">     
+        </v-avatar> 
+    </a>
+    <v-divider></v-divider>
+    <div class="mini-menu">
+        <v-btn icon href="/">
+            <v-icon>home</v-icon>
+        </v-btn>
+        <v-btn icon href="/categories/">
+            <v-icon>folder</v-icon>
+        </v-btn>
+        <v-btn icon href="/tags/">
+            <v-icon>bookmark</v-icon>
+        </v-btn>
+        <v-btn icon @click="SetNightMode">
+            <v-icon>{{ nightMode }}</v-icon>
+        </v-btn>
+    </div>
+    <v-list id="main-menu" class="font-weight-bold" flat>
+        
+            
+            <v-list-item href="/archives/" link>
+            <v-list-item-icon><v-icon>archive</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                归档
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="/about/" link>
+            <v-list-item-icon><v-icon>account_circle</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                关于
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/" link>
+            <v-list-item-icon><v-icon>rss_feed</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                我的博客
+            </v-list-item-content>
+            </v-list-item>
+        
+            
+            <v-list-item href="https://garybear.cn/hexo-theme-insulin/doc/#/" link>
+            <v-list-item-icon><v-icon>insert_drive_file</v-icon></v-list-item-icon>
+            <v-list-item-content>
+                说明文档
+            </v-list-item-content>
+            </v-list-item>
+        
+    </v-list>
+    <v-divider></v-divider>
+    
+        <div class="post-toc">
+            <a href="/2024/10/29/%E3%80%8Aweb%E5%AE%89%E5%85%A8%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0/" class="toc-header">文章目录</a>
+            <div class="toc-content">
+                
+            </div>
+        </div>
+    
+
+    <div id="footer">
+        <div class="footer-social">
+            
+                
+                <v-btn icon href="mailto:kb1000fx@gmail.com" target="_blank">
+                    <v-icon>fas fa-envelope</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://github.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-github</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://steamcommunity.com/profiles/76561198346798163" target="_blank">
+                    <v-icon>fab fa-steam</v-icon>
+                </v-btn>
+            
+                
+                <v-btn icon href="https://weibo.com/kb1000fx" target="_blank">
+                    <v-icon>fab fa-weibo</v-icon>
+                </v-btn>
+            
+        </div>
+        <v-divider></v-divider>
+        <div class="footer-content">
+            
+                <span id="busuanzi_container_site_uv" style="display: none;"> 
+                    总访客量 <span id="busuanzi_value_site_uv"></span>
+                </span>
+                <br>
+            
+            <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a></span><br>
+            <span>Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+            <span>
+                &copy; 2015 - 2024 
+                小马
+            </span>
+        </div>
+    </div>
+</div>
+
+                        </v-col>
+                        <v-col cols="12" md="10">
+                            <v-row>
+  <v-col cols="12" md="8" align-self="end">
+    <div id="site-header">
+      <div id="site-title">
+        <a href="/" rel="home"></a>
+      </div>
+      <div id="site-description"></div>
+      <div id="mobile-menu" class="d-block d-md-none">
+        <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-inner-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+        <div class="mobile-mini-menu">
+          <v-btn icon href="/">
+              <v-icon>home</v-icon>
+          </v-btn>
+          <v-btn icon href="/categories/">
+              <v-icon>folder</v-icon>
+          </v-btn>
+          <v-btn icon href="/tags/">
+              <v-icon>bookmark</v-icon>
+          </v-btn>
+          <v-btn icon @click="SetNightMode">
+              <v-icon>{{ nightMode }}</v-icon>
+          </v-btn>
+          
+            
+            <v-btn icon href="/archives/">
+              <v-icon>archive</v-icon>
+            </v-btn>
+          
+            
+            <v-btn icon href="/about/">
+              <v-icon>account_circle</v-icon>
+            </v-btn>
+          
+            
+            <v-btn icon href="https://garybear.cn/">
+              <v-icon>rss_feed</v-icon>
+            </v-btn>
+          
+            
+            <v-btn icon href="https://garybear.cn/hexo-theme-insulin/doc/#/">
+              <v-icon>insert_drive_file</v-icon>
+            </v-btn>
+          
+        </div>
+      </div>    
+    </div>
+  </v-col>  
+  <v-col cols="4" align-self="end" class="d-none d-md-block">
+    <v-col align-self="end">
+      <v-text-field label="请输入关键字" data-src="search.xml" v-model="searchHeaderValue" prepend-icon="search" clearable clear-icon="clear" @keydown.enter="EnterSearch(searchHeaderValue,false)"></v-text-field>
+    </v-col> 
+  </v-col>
+</v-row>
+
+                            <v-card class="elevation-2 post-card">
+    
+    
+        <div class="post-header">
+  <a class="post-header-title font-weight-medium" href="/2024/10/29/%E3%80%8Aweb%E5%AE%89%E5%85%A8%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90%E3%80%8B%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0/">《web安全深度剖析》学习日记</a>
+  <div class="post-header-meta">   
+    <span>
+      <v-icon color="">event</v-icon>
+      发布于:&nbsp;2024-10-29
+    </span>
+    <span>
+      <v-icon color="">event_available</v-icon>
+      更新于:&nbsp;2024-10-29
+    </span>
+    <span>
+      <v-icon color="">folder</v-icon>
+      分类于:&nbsp;未分类
+    </span>
+    
+    <span>
+      <v-icon color="">visibility</v-icon>
+      阅读次数:&nbsp;<span id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv"></span></span>
+    </span>
+    
+  </div>
+</div>
+
+    
+    
+    
+    
+    <div class="post-content typo">
+        <p><strong>2024年10月19日</strong></p>
+<p>渗透的一个必要条件是：二者能通信！！！</p>
+<p>当今时代的战场在web应用程序</p>
+<p>早期web多数为静态文件，目前是动态文件的天下</p>
+<p>web有庞大又强大的功能&#x3D;&#x3D;数据库+编程语言+web容器（我感觉是浏览器）+web应用程序设计者</p>
+<p>web默认80端口</p>
+<p>开发人员的安全意识！！！</p>
+<p>想做到高的安全，应该考虑“动态链接统一管理化”，就像是“一条龙服务”，如果在中间断了，后面的人不了解前面的原理，很难维修。目前的网络市场还没达到“一条龙”级别。</p>
+<p>web攻击分三大类，c段渗透，社会工程学，services（实际的攻击是杂交的，就是什么都可能用到）<br>c段渗透：利用同一网段下的易攻性，制作跳板等<br>社会工程学：即心里学，人的劣质性，如贪小便宜、妄想一飞冲天（赌钱）、色欲（本质上都是控制力弱的表现），还有可能是无知等等<br>services：溢出、mysql、ftp、mssql、rdp（远程桌面协议）、web（sql注入、上传漏洞、xss、包含漏洞、代码执行、逻辑漏洞）</p>
+<p>程序！！！</p>
+<p>黑客与骇客之间的战争</p>
+<p>c语言，神一样的语言！！！</p>
+<p>c&#x2F;s架构即client&#x2F;server，客户端&#x2F;服务端架构<br>b&#x2F;s架构即browser&#x2F;server，浏览器&#x2F;服务端架构</p>
+<p>统一的应用层协议——http</p>
+<p>url：<br>协议:&#x2F;&#x2F;服务器IP[：端口]&#x2F;路径&#x2F;[?查询]</p>
+<p><strong>2024年10月20日</strong></p>
+<p>浏览器是衣服（渲染工作）</p>
+<p>http是无状态协议（短暂连接）</p>
+<p>http只能由客户端发起</p>
+<p>请求request&#x2F;应答response</p>
+<p>http请求包括请求行（请求方法）、请求头（消息报头）、请求正文三部分<br>请求行：方法、请求内容、版本信息<br>请求头：请求的附加信息与客户端自身的信息<br>请求正文：参数（空白行后面，不包括空白行）（可要可不要）</p>
+<p>方法有get、head、post、put、delete、trace、connect、options等</p>
+<p>请求头内可能有host、user-agent、referer、cookie、range、accept、<br>accept-charset</p>
+<p>http响应包括响应行、响应头（消息报头）、响应正文（消息主题）<br>响应行：版本、状态码、消息<br>响应头：根据客户端请求变化<br>响应正文：html数据</p>
+<p>状态码有5类37个（最讨厌404了）</p>
+<p>响应头可能有server、set-cookie、last-modified（最后时间）、location（经常配合302状态码）、refresh（定时刷新）</p>
+<p>http消息又称http头，包括请求头、响应头、普通头（了解即可）、实体头</p>
+<p>普通头：data、connection、close、cache-control等</p>
+<p>实体头：content-type（介质类型）、content-encoding（媒体类型的修饰符）、content-length（长度）、last-modified（最后修改的时间）等</p>
+<p><strong>2024年10月21日</strong></p>
+<p>模拟http请求实验<br>使用telnet工具（win11默认没有打开，要自己打开）<br>telnet：默认23端口，明文传递，tcp协议，默认不回显（记得ctrl+]）</p>
+<p>打开telnet<br><img src="/images/web/%E6%A8%A1%E6%8B%9Fhttp%E8%AF%B7%E6%B1%82/1.png"><br><img src="/images/web/%E6%A8%A1%E6%8B%9Fhttp%E8%AF%B7%E6%B1%82/2.png"><br><img src="/images/web/%E6%A8%A1%E6%8B%9Fhttp%E8%AF%B7%E6%B1%82/3.png"></p>
+<p>输入以下命令（输入速度要快而且不能错，不然会断开连接！！！）：<br>GET &#x2F;index.html HTTP&#x2F;1.1<br>HOST: <a target="_blank" rel="noopener" href="http://www.baidu.com(按两次enter)/">www.baidu.com（按两次enter）</a><br><img src="/images/web/%E6%A8%A1%E6%8B%9Fhttp%E8%AF%B7%E6%B1%82/4.png"><br><img src="/images/web/%E6%A8%A1%E6%8B%9Fhttp%E8%AF%B7%E6%B1%82/5.png" alt="我这边乱码了，应该是百度的保护机制"></p>
+<p><strong>2024年10月22日</strong></p>
+<p>https（默认443端口）是http（默认80端口）的升级版（更加安全）</p>
+<p>https依赖ssl加密</p>
+<p>https需要到ca申请证书（一般要钱）</p>
+<p>证书颁发机构CA（Certificate Authority）<br>在网络安全领域，CA 是指证书颁发机构。它是负责颁发数字证书的实体，数字证书用于验证网站、服务器、用户等的身份，确保网络通信的安全性和真实性。例如，当你访问一个安全的网站（以 https 开头）时，网站的证书通常是由某个知名的 CA 颁发的。</p>
+<p>千万不要为了减少服务器端的压力，而减少后台验证，这样做会大大增加安全隐患，前后验证都要！！！</p>
+<p>burpsuite是一个web应用安全测试工具的集成平台，包含众多工具，如：<br>proxy（中间人）<br>spider（爬虫）<br>scanner（查找web应用程序漏洞）<br>intruder（自动化攻击）<br>repeater（补发单独的http请求）<br>sequencer（分析不可预知性与随机性）<br>decoder（解码与编码）<br>comparer（得到请求与响应的可视化差异）</p>
+<p><strong>2024年10月23日</strong></p>
+<p>xss跨站漏洞（拦截、修改、发送请求包）<br>str&#x3D;<script>alert(/xss/)</script></p>
+<p>前端JavaScript验证是为了防止“用户输入错误”<br>服务端验证是为了防止“恶意攻击”</p>
+<p>未知的漏洞是扫描不出来的，要拦截http的请求和响应，仔细分析</p>
+<p>seo：搜索引擎优化</p>
+<p>网络渗透基础功：信息探测！！！<br>知己知彼，百战不殆</p>
+<p>google，目前公认的最强的的搜索引擎</p>
+<p>搜集目标：子域名、web目录结构、敏感文件</p>
+<p>site 指定域名<br>intext 正文关键字<br>intitle 标题关键字<br>info 基本信息<br>inurl url关键字<br>filetype 文件类型 </p>
+<p>应对蜘蛛、爬虫等<br>对外暴露的页面不要使用敏感目录<br>敏感信息的名字要设置的很复杂</p>
+<p>zenmap是nmap的图形化界面</p>
+<p>任何程序想要在cmd下访问，都必须配置环境变量</p>
+<p>每一款工具的“help”是最重要的，想要完全掌握工具，就必须非常耐心的把help文档看完！！！</p>
+<p><strong>2024年10月24日</strong></p>
+<p>经验也很重要，也就是要花时间和精力</p>
+<p>http的server头的web容器的信息是可以伪造的！</p>
+<p>信息探测工具：准确为主，速度为辅</p>
+<p>linux系统区分大小写，windows系统不区分大小写</p>
+<p>好多好多工具啊，谨记：我们是工具是使用者，可千万别被工具奴隶了！！！</p>
+<p>除去硬件的影响，计算机本身是没有问题的，之所以有那么多漏洞，源于程序员是人，我们的思考局限于人脑，计算机是怎么思考的呢？</p>
+<p>sql注入：绕过程序限制，获得更多信息与权限</p>
+<p>弱类型语言会自动推导变量类型，如asp，php</p>
+<p>强类型，如java、c#等</p>
+<p>强类型很少存在数字型sql注入病毒</p>
+<p>字符型sql的关键在与闭合sql以及注释多余代码</p>
+<p>字符串连接符<br>sql server +<br>oracle ||<br>mysql 空格<br>所以啊，要提前了解数据库类型！！！</p>
+<p>严格来说，在数据库中，数字也是字符</p>
+<p>根据注入的位置，又可以分类为cookie、post注入等</p>
+<p>大部分的web应用程序防火墙都过滤了单引号，但是16进制的sql语句不存在单引号，要记得这一点</p>
+<p>查看数据库版本<br>sql server：@@version<br>mysql：version（）<br>每一种数据库都不一样</p>
+<p><strong>2024年10月25日</strong></p>
+<p>mysql的三种注释<br>1、#123<br>2、–123空空空 （注意，这个后面要跟上至少一个的空格，tag也行）<br>3、&#x2F;<em>123</em>&#x2F; （注意&#x2F;<em>！</em>&#x2F;中的感叹号）</p>
+<p>omg，英语要学，要专门学计算机英语，然后再学一点交流的英语（方便看网站）</p>
+<p>在oracle与sql server中，列的数据类型在不确定的情况下，最好使用NULL关键字匹配</p>
+<p>常用的mysql系统函数<br>load_file() 读文件<br>into outfile 写文件<br>concat（）或concat_ws（） 连接字符串</p>
+<p>延时函数挺好玩的，可以方便找到注入点</p>
+<p>url中，？是用来分隔资源的路径和传递给该资源的参数的</p>
+<p>伪静态页面：通过某种技术将php、asp等动态页面伪装为html、htm等静态页面</p>
+<p>动态页面的url常常有参数，有？，而伪静态页面的url一般很简洁</p>
+<p>waf是指web应用防火墙</p>
+<p>pangolin是指穿山甲sql注入测试渗透安全工具</p>
+<p>GUI图形用户界面（人性化）</p>
+<p>IDS入侵检测系统</p>
+<p>Havij（精悍、小萝卜、萝卜头）</p>
+<p>有输入的地方，就可能存在风险！！！！！！！</p>
+<p>防御sql，还是得从代码入手</p>
+<p>如果服务器过滤关键字，可以试试sel&#x2F;**&#x2F;ect</p>
+<p><strong>2024年10月26日</strong></p>
+<p>防御数字型注入的关键是严格判断数据类型<br>防御字符型注入的关键是转义</p>
+<p>请不要局限与一次sql注入<br>多重sql注入更加难防（攻击和防御是同时进步的）</p>
+<p>预编译语句也可以防范sql注入</p>
+<p>ORM注入即类对象关系映射框架注入</p>
+<p>！！！！！！！<br>碰到sql语句时完全采用”preparedstatement“类，且必须用参数绑定！！！</p>
+<p>客户端JavaScript验证是应对普通用户的</p>
+<p>突破JavaScript验证的方法：想办法使onsubmit事件失效、拦截然后更改内容</p>
+<p>任何客户端验证都是不安全的！！！</p>
+<p>服务端验证才能防止攻击者！！！</p>
+<p>提高服务端检测时不要忘记解析漏洞哈</p>
+<p>windows系统下，如果文件名以”.”或者” “作为结尾，则自动去除点或者空格</p>
+<p>当你了解了游戏的所有规则之后，你玩的才是真正的游戏，规则，有明有暗，万不可忽略暗的一面，且不可忘记明的一面</p>
+<p>web的黑名单是不允许上传的文件格式，白名单是允许上传的文件格式</p>
+<p>HTML里面有个隐藏标签哦<input type="hidden" name = "Extension"  value="up"/>，针对那种自动创建目录的”健壮“代码</p>
+<p>FCKeditor开源的文本编译器已改名为CKeditor</p>
+<p><strong>2024年10月27日</strong></p>
+<p>上传漏洞形成原因：<br>目录过滤不严，攻击者可能形成畸形目录<br>文件未重命名，攻击者可能利用web容器解析漏洞</p>
+<p>安全是一个整体！！！</p>
+<p>工作的时候要看情况写代码，做好了不一定就是做好了，做的不好也不一定就是做的不好</p>
+<p>上传漏洞是完全可以避免的，只要做到路径验证和文件名随机重命名即可</p>
+<p>xss也叫做css，即跨站脚本攻击</p>
+<p>xss属于客户端攻击，受害者最终是用户，但不要以为更自己的网站和服务器安全没有关系，比如说网站的管理员也是用户，攻击者可以从他身上下手获取权限</p>
+<p>xss攻击的原理是攻击者使用JavaScript、actionscript、vbscript等语言在客户端网页上嵌入恶意脚本代码</p>
+<p>JavaScript可以获取用户的cookie、改变网页内容、url调转</p>
+<p>JavaScript加载外部的代码文件可以是任意扩展名（无扩展名也可以，只要包含javascript代码即可）</p>
+<p>xss主要分为反射类、存储类、DOM类</p>
+<p>DOM通常代表HTML、XHTML、XML中的对象</p>
+<p>href是属性</p>
+<p>人和工具结合，无敌了</p>
+<p><strong>2024年10月28日</strong></p>
+<p>cookie文件含有用户的id、密码、停留时间等</p>
+<p>cookie对于用户的 作用就是可以省去登录的过程（直接登录）</p>
+<p>cookie有时间长久之分，在内存上的是非持久，在硬盘上的是持久</p>
+<p>cookie泄漏感觉好严重啊，都可以直接登录了</p>
+<p>cookie是有大小和数量的限定的，具体情况具体分析</p>
+<p>每个cookie文件都是一个txt文件，都以“用户名@网站url”命名</p>
+<p>cookie可以看有没有“expires&#x3D;date”来区分是内存的还是硬盘的</p>
+<p>session与cookie类似，但是session的id存储在服务端</p>
+<p>session是“会话”</p>
+<p>addslashes（）函数可以在单引号、双引号、反斜杠、NULL之前添加反斜杠</p>
+<p>蠕虫病毒就是具有传染性的恶意软件</p>
+<p>xss蠕虫攻击对象一般是大型社交网站</p>
+<p>xss蠕虫的迹象是网站中出现了十分吸引人的内容，诱惑人们去点击</p>
+<p>xss跨站式病毒源于输入输出没有严格的控制，引了那句老话，有输入的地方，就有危险</p>
+<p>xss-“真正掌控输入输出”</p>
+<p><strong>2024年10月29日</strong></p>
+<p>java体系非常大，总体上分为SE、EE、ME，但都是以SE为基础</p>
+<p>java三大框架hibernate、spring、struts</p>
+<p>防范命令执行漏洞：<br>少用系统执行命令（别用最好）<br>变量的过滤，敏感字符的转义<br>动态函数要谨慎<br>不能完全控制的危险函数不要用</p>
+<p>文件包含漏洞不止在php语言中，其他语言也有，只不过php语言的文件包含功能太强大了</p>
+<p>安装apache时不要选择默认路径</p>
+<p>MVC是模型（model）、视图（view）、控制（controller）的缩写</p>
+<p>客户端跳转即重定向<br>服务端跳转即url转发</p>
+<p>每个javaEE项目都有一个web.xml，里面包含了大量敏感信息</p>
+<p>由于语言设计的差异，相对来说，jsp比php拥有更高的安全性，php的某些优点就是它的缺点，其他语言也是</p>
+<p>防范包含漏洞：<br>严格判断包含中的参数是否外部可控<br>路径限制<br>包含文件验证<br>不要用动态包含</p>
+<p>forgery，伪造</p>
+<p>跨站请求伪造即CSRF、one click attack、session riding、XSRF、苏醒的巨人，都是一个意思哈</p>
+<p>csrf比xss更加难以防范，更加危险</p>
+<p>csrf能干嘛？<br>盗用你的身份，以你的名义进行非法操作；<br>使用你的账号发送邮件，获取你的敏感信息，盗走你的财产；</p>
+
+    </div>
+    <!--文末结束语-->
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;"> --- 本文结束 <i class="fas fa-heart"></i> The End --- </div>
+    
+    <!--页脚广告-->
+    
+    <v-divider></v-divider>
+    
+    <div class="post-nav">             
+              
+        
+    </div>
+</v-card>
+
+
+
+        
+                            <div id="mobile-footer" class="d-block d-md-none">
+                                <v-divider></v-divider>
+                                <div id="mobile-footer-content">
+                                    <span>Theme: <a target="_blank" rel="noopener" href="https://github.com/kb1000fx/hexo-theme-insulin">Insulin</a> &nbsp; Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a></span><br>
+                                    <span> &copy; 2015 - 2024 小马</span>
+                                </div>
+                            </div>                   
+                        </v-col>                                            
+                    </v-row>
+                </v-container>
+            </v-content>
+        </v-app>
+    </div>
+    
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.2.30"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.5.2/base64.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@8.4.8/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({
+        startOnLoad: true,
+        theme: "default"
+    });</script>
+
+
+
+
+
+</body>
+</html>
